@@ -1,0 +1,31 @@
+{
+  "name": "agentflow",
+  "version": "0.1.0",
+  "description": "Mini n8n orienté agents IA",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"pnpm --dir frontend dev\" \"cd backend && .venv/bin/python -m uvicorn src.main:app --reload --host 127.0.0.1 --port 8000\" --names \"frontend,backend\" --prefix-colors \"blue,green\"",
+    "build": "pnpm --filter frontend build",
+    "lint": "cd frontend && eslint . --max-warnings 0 && cd ../backend && ruff check src/ && black --check src/",
+    "typecheck": "cd frontend && tsc --build",
+    "test": "pnpm --filter frontend test && cd backend && python -m pytest",
+    "test:watch": "cd frontend && vitest",
+    "db:generate": "cd backend && alembic revision --autogenerate",
+    "db:migrate": "cd backend && alembic upgrade head",
+    "seed:demo": "echo \"Non implémenté - sera ajouté dans la spec 06\""
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.2"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

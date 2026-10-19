@@ -1,0 +1,14 @@
+{
+  "name": "@agentflow/server",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "cd .. && cd .. && python -m venv .venv && source .venv/bin/activate && cd apps/server && pip install -e .[dev] && python -m uvicorn src.main:app --reload --host 127.0.0.1 --port 8000",
+    "start": "python -m uvicorn src.main:app --host 127.0.0.1 --port 8000",
+    "db:generate": "cd data && alembic revision --autogenerate -m 'Auto migration'",
+    "db:migrate": "cd data && alembic upgrade head",
+    "test": "python -m pytest",
+    "lint": "ruff check src/ && black --check src/",
+    "format": "ruff --fix src/ && black src/"
+  }
+}
